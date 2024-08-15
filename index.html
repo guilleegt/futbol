@@ -132,7 +132,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion">
                                 LaLiga Hypermotion
                             </div>
                         </td>
@@ -145,7 +145,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion">
                                 LaLiga Hypermotion 2
                             </div>
                         </td>
@@ -158,9 +158,8 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports">
                                 M+. LaLiga
-
                                 <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
                             </div>
                         </td>
@@ -173,10 +172,9 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports">
                                 DAZN LaLiga
-
-                           <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
+                                <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
                             </div>
                         </td>
                         <td>
@@ -188,7 +186,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
                                 M+. Champions
                             </div>
                         </td>
@@ -201,7 +199,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
                                 M+. Champions 2
                             </div>
                         </td>
@@ -214,7 +212,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
                                 M+. Champions 3
                             </div>
                         </td>
@@ -227,7 +225,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1">
                                 DAZN F1
                             </div>
                         </td>
@@ -237,7 +235,6 @@
                         </td>
                     </tr>
 
-
                 </tbody>
             </table>
         </div>
@@ -245,16 +242,15 @@
 
     <script>
         const validPassword = '123';
-        const cookieName = 'loggedIn';
 
         function setCookie(name, value, days) {
             let expires = "";
             if (days) {
                 const date = new Date();
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "expires=" + date.toUTCString();
+                expires = "; expires=" + date.toUTCString();
             }
-            document.cookie = name + "=" + (value || "") + ";" + expires + ";path=/";
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
 
         function getCookie(name) {
@@ -262,10 +258,30 @@
             const ca = document.cookie.split(';');
             for (let i = 0; i < ca.length; i++) {
                 let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1);
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
                 if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
             }
             return null;
+        }
+
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
+
+        function checkLogin() {
+            const mainContent = document.getElementById('main-content');
+            const loginContainer = document.getElementById('login-container');
+            const channelsContainer = document.getElementById('channels-container');
+
+            if (getCookie('loggedIn') === 'true') {
+                loginContainer.style.display = 'none'; // Oculta el formulario de inicio de sesión
+                mainContent.style.display = 'flex'; // Muestra el contenido principal
+                channelsContainer.style.display = 'block'; // Asegura que el contenedor de canales esté visible
+            } else {
+                loginContainer.style.display = 'flex'; // Muestra el formulario de inicio de sesión
+                mainContent.style.display = 'none'; // Oculta el contenido principal
+                channelsContainer.style.display = 'none'; // Asegura que el contenedor de canales esté oculto
+            }
         }
 
         function checkPassword() {
@@ -276,20 +292,12 @@
             const channelsContainer = document.getElementById('channels-container');
 
             if (passwordInput === validPassword) {
-                setCookie(cookieName, 'true', 1); // Establece una cookie válida por 1 día
+                setCookie('loggedIn', 'true', 1); // Establece la cookie para recordar al usuario
                 loginContainer.style.display = 'none'; // Oculta el formulario de inicio de sesión
                 mainContent.style.display = 'flex'; // Muestra el contenido principal
                 channelsContainer.style.display = 'block'; // Asegura que el contenedor de canales esté visible
             } else {
                 errorMessage.style.display = 'block'; // Muestra el mensaje de error
-            }
-        }
-
-        function checkLogin() {
-            if (getCookie(cookieName) === 'true') {
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('main-content').style.display = 'flex';
-                document.getElementById('channels-container').style.display = 'block';
             }
         }
 
@@ -314,9 +322,9 @@
             });
         }
 
+        // Inicialmente oculta el contenido principal y verifica el estado de inicio de sesión
         window.onload = () => {
             checkLogin();
-            document.getElementById('main-content').style.display = 'none'; // Asegura que el contenido principal esté oculto inicialmente
         };
     </script>
 </body>
