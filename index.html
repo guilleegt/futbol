@@ -145,7 +145,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
+                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion">
                                 LaLiga Hypermotion
                             </div>
                         </td>
@@ -154,103 +154,7 @@
                             <button class="button" onclick="redirectToURL('acestream://06b367c22394a1358c9cefa0cb5d0b64b9b2b3f4')">PC</button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
-                                LaLiga Hypermotion 2
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
-                                M+. LaLiga
-
-                                <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://f031f5728b32f6089dda28edebe990cf198108d8', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://f031f5728b32f6089dda28edebe990cf198108d8')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
-                                DAZN LaLiga
-
-                           <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
-                                M+. Champions
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://931b1984badcb821df7b47a66ac0835ac871b51c', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://931b1984badcb821df7b47a66ac0835ac871b51c')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
-                                M+. Champions 2
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
-                                M+. Champions 3
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1"> <!-- Ruta de la imagen -->
-                                DAZN F1
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://9dad717d99b29a05672166258a77c25b57713dd5', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://9dad717d99b29a05672166258a77c25b57713dd5')">PC</button>
-                        </td>
-                    </tr>
-
-
+                    <!-- Agregar los demás canales aquí -->
                 </tbody>
             </table>
             <button class="logout-button" onclick="logout()">Cerrar Sesión</button>
@@ -258,7 +162,7 @@
     </div>
 
     <script>
-        const validPassword = '123';
+        const validPassword = 'cobraservices';
 
         function setCookie(name, value, days) {
             let expires = "";
@@ -282,7 +186,7 @@
         }
 
         function eraseCookie(name) {
-            document.cookie = name + '=; Max-Age=-99999999;';
+            document.cookie = name + '=; Max-Age=-99999999; path=/';
         }
 
         function checkLogin() {
@@ -319,7 +223,7 @@
         }
 
         function logout() {
-            eraseCookie('loggedIn'); // Borra la cookie de sesión
+            eraseCookie('loggedIn'); // Elimina la cookie de sesión
             checkLogin(); // Actualiza la interfaz para mostrar el formulario de inicio de sesión
         }
 
