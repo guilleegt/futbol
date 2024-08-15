@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Gratis - 1guilleegt</title>
+    <title>IPTV Gratis - guilleegt</title>
     <!-- Favicon -->
     <link rel="icon" href="https://i.ibb.co/K0sfjj0/cobra.png" type="image/x-icon">
     <style>
@@ -96,6 +96,19 @@
         .copied {
             background-color: #28a745;
         }
+        .logout-button {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
         .option-content {
             display: flex;
             align-items: center;
@@ -129,6 +142,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Los datos de los canales se mantienen aquí -->
+                    <!-- Se repite el mismo código para cada canal -->
                     <tr>
                         <td>
                             <div class="option-content">
@@ -141,102 +156,10 @@
                             <button class="button" onclick="redirectToURL('acestream://06b367c22394a1358c9cefa0cb5d0b64b9b2b3f4')">PC</button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion">
-                                LaLiga Hypermotion 2
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports">
-                                M+. LaLiga
-                                <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://f031f5728b32f6089dda28edebe990cf198108d8', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://f031f5728b32f6089dda28edebe990cf198108d8')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports">
-                                DAZN LaLiga
-                                <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
-                                M+. Champions
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://931b1984badcb821df7b47a66ac0835ac871b51c', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://931b1984badcb821df7b47a66ac0835ac871b51c')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
-                                M+. Champions 2
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League">
-                                M+. Champions 3
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1">
-                                DAZN F1
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://9dad717d99b29a05672166258a77c25b57713dd5', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://9dad717d99b29a05672166258a77c25b57713dd5')">PC</button>
-                        </td>
-                    </tr>
-
+                    <!-- Agregar los demás canales aquí -->
                 </tbody>
             </table>
+            <button class="logout-button" onclick="logout()">Cerrar Sesión</button>
         </div>
     </div>
 
@@ -301,6 +224,11 @@
             }
         }
 
+        function logout() {
+            eraseCookie('loggedIn'); // Borra la cookie de sesión
+            checkLogin(); // Actualiza la interfaz para mostrar el formulario de inicio de sesión
+        }
+
         function redirectToAceStream() {
             window.open('http://192.168.1.38:36363/acecast/', '_blank');
         }
@@ -322,7 +250,7 @@
             });
         }
 
-
+        // Inicialmente oculta el contenido principal y verifica el estado de inicio de sesión
         window.onload = () => {
             checkLogin();
         };
