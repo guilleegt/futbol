@@ -132,7 +132,7 @@
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion">
+                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
                                 LaLiga Hypermotion
                             </div>
                         </td>
@@ -141,7 +141,103 @@
                             <button class="button" onclick="redirectToURL('acestream://06b367c22394a1358c9cefa0cb5d0b64b9b2b3f4')">PC</button>
                         </td>
                     </tr>
-                    <!-- Agrega más filas aquí según sea necesario -->
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/x6V7Rzg/hypermotion.png" alt="Imagen LaLiga Hypermotion"> <!-- Ruta de la imagen -->
+                                LaLiga Hypermotion 2
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://d81b4f2f3fde433539c097b2edc9b587ca47b087')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
+                                M+. LaLiga
+
+                                <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://f031f5728b32f6089dda28edebe990cf198108d8', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://f031f5728b32f6089dda28edebe990cf198108d8')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/bLkKfHQ/laliga.png" alt="Imagen LaLiga EA Sports"> <!-- Ruta de la imagen -->
+                                DAZN LaLiga
+
+                           <!--No funciona--> <img src="https://i.ibb.co/ZT4qBMx/error.png" alt="Imagen Error">
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://a3bca895c58d3fc7d5e4259d3d5e3cf0291d1914')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                M+. Champions
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://931b1984badcb821df7b47a66ac0835ac871b51c', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://931b1984badcb821df7b47a66ac0835ac871b51c')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                M+. Champions 2
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
+                                M+. Champions 3
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2')">PC</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="option-content">
+                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1"> <!-- Ruta de la imagen -->
+                                DAZN F1
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button" onclick="copyToClipboard('acestream://9dad717d99b29a05672166258a77c25b57713dd5', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://9dad717d99b29a05672166258a77c25b57713dd5')">PC</button>
+                        </td>
+                    </tr>
+
+
                 </tbody>
             </table>
         </div>
@@ -149,6 +245,28 @@
 
     <script>
         const validPassword = '123';
+        const cookieName = 'loggedIn';
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
         function checkPassword() {
             const passwordInput = document.getElementById('password').value;
@@ -158,11 +276,20 @@
             const channelsContainer = document.getElementById('channels-container');
 
             if (passwordInput === validPassword) {
+                setCookie(cookieName, 'true', 1); // Establece una cookie válida por 1 día
                 loginContainer.style.display = 'none'; // Oculta el formulario de inicio de sesión
                 mainContent.style.display = 'flex'; // Muestra el contenido principal
                 channelsContainer.style.display = 'block'; // Asegura que el contenedor de canales esté visible
             } else {
                 errorMessage.style.display = 'block'; // Muestra el mensaje de error
+            }
+        }
+
+        function checkLogin() {
+            if (getCookie(cookieName) === 'true') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+                document.getElementById('channels-container').style.display = 'block';
             }
         }
 
@@ -187,9 +314,9 @@
             });
         }
 
-        // Inicialmente oculta el contenido principal
         window.onload = () => {
-            document.getElementById('main-content').style.display = 'none';
+            checkLogin();
+            document.getElementById('main-content').style.display = 'none'; // Asegura que el contenido principal esté oculto inicialmente
         };
     </script>
 </body>
