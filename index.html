@@ -370,7 +370,13 @@
             });
         }
 
-        // Detecta la apertura de DevTools y cierra la página
+        
+
+
+        window.onload = () => {
+            checkLogin();
+
+            // Detecta la apertura de DevTools y cierra la página
         (function() {
             const devtools = { open: false, orientation: null };
             const threshold = 160;
@@ -384,8 +390,7 @@
                     if (!devtools.open || devtools.orientation !== orientation) {
                         devtools.open = true;
                         devtools.orientation = orientation;
-                        //window.close(); // Intenta cerrar la ventana
-                        exit(0);
+                        window.close();
                     }
                 } else {
                     devtools.open = false;
@@ -393,10 +398,6 @@
                 }
             }, 500);
         })();
-
-        // Inicialmente oculta el contenido principal y verifica el estado de inicio de sesión
-        window.onload = () => {
-            checkLogin();
         };
     </script>
 </body>
