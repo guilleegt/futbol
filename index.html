@@ -391,7 +391,7 @@
                         devtools.open = true;
                         devtools.orientation = orientation;
                         window.close();
-                        window.location.href = 'https://www.youtube.com/';
+                        window.location.href = 'https://youtu.be/exPsgjp8O9Q?feature=shared';
                     }
                 } else {
                     devtools.open = false;
@@ -399,6 +399,26 @@
                 }
             }, 500);
         })();
+
+
+        document.onkeydown = function(e) {
+        if(e.keyCode == 123) {
+        return false;
+        }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+        return false;
+        }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+        return false;
+        }
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+        return false;
+        }
+
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+        return false;
+        }      
+    }
         };
     </script>
 </body>
