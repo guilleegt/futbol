@@ -215,68 +215,27 @@
                         <td>
                             <div class="option-content">
                                 <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
-                                M+. Champions 2
+                                DAZN 1
                             </div>
                         </td>
                         <td>
-                            <button class="button" onclick="copyToClipboard('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://fc2fe31b0bce25e2dc7ab4d262bf645e2be5a393')">PC</button>
+                            <button class="button" onclick="copyToClipboard('acestream://f031c992a106a688d78f9e4d8fe67a1c3d9eac90', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://f031c992a106a688d78f9e4d8fe67a1c3d9eac90')">PC</button>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
                             <div class="option-content">
-                                <img src="https://i.ibb.co/274Z78P/champions.png" alt="Imagen Champions League"> <!-- Ruta de la imagen -->
-                                M+. Champions 3
+                                <img src="https://i.ibb.co/NnmThkt/canaldeporteshd.png" alt="Imagen Canal Deportes"> <!-- Ruta de la imagen -->
+                                DAZN 2
                             </div>
                         </td>
                         <td>
-                            <button class="button" onclick="copyToClipboard('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://ad372cba73aa0ece207a79532b3e30b731136bb2')">PC</button>
+                            <button class="button" onclick="copyToClipboard('acestream://eeed3c59d36ac01eddf4ae5fbd973ab0aa6ef08d', this)">TV</button>
+                            <button class="button" onclick="redirectToURL('acestream://eeed3c59d36ac01eddf4ae5fbd973ab0aa6ef08d')">PC</button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/7RPzhCf/premier.png" alt="Imagen Premier League"> <!-- Ruta de la imagen -->
-                                Premier League
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://8ca07071b39185431f8e940ec98d1add9e561639', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://8ca07071b39185431f8e940ec98d1add9e561639')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/3vzYZ8P/f1.png" alt="Imagen F1"> <!-- Ruta de la imagen -->
-                                DAZN F1
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://9dad717d99b29a05672166258a77c25b57713dd5', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://9dad717d99b29a05672166258a77c25b57713dd5')">PC</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="option-content">
-                                <img src="https://i.ibb.co/HgCbWxb/Movistar.png" alt="Imagen Movistar Deportes"> <!-- Ruta de la imagen -->
-                                M+. Deportes
-                            </div>
-                        </td>
-                        <td>
-                            <button class="button" onclick="copyToClipboard('acestream://d00223931b1854163e24c5c22475015d7d45c112', this)">TV</button>
-                            <button class="button" onclick="redirectToURL('acestream://d00223931b1854163e24c5c22475015d7d45c112')">PC</button>
-                        </td>
-                    </tr>
-
-
                 </tbody>
             </table>
             <button class="logout-button" onclick="logout()">Cerrar sesión</button>
@@ -313,12 +272,14 @@
 
         function checkLogin() {
             let isLoggedIn = getCookie("isLoggedIn");
-            if (isLoggedIn !== null) {
+            if (isLoggedIn === "true") { // Verifica que el valor sea estrictamente "true"
                 document.getElementById('login-container').style.display = 'none';
                 document.getElementById('main-content').style.display = 'flex';
                 document.getElementById('channels-container').style.display = 'block';
                 document.getElementById('acestream-button-container').style.display = 'block';
                 enableDevToolsProtection(); // Activa la protección contra DevTools si está logueado
+            } else {
+                eraseCookie("isLoggedIn"); // Si la cookie no es "true", la borra
             }
         }
 
@@ -326,7 +287,7 @@
             let password = document.getElementById('password').value;
             let errorMessage = document.getElementById('error-message');
             if (password === validPassword) {
-                setCookie("isLoggedIn", true, 1);
+                setCookie("isLoggedIn", "true", 1); // Establece la cookie solo si la contraseña es correcta
                 document.getElementById('login-container').style.display = 'none';
                 document.getElementById('main-content').style.display = 'flex';
                 document.getElementById('channels-container').style.display = 'block';
