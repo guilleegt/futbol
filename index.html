@@ -292,55 +292,103 @@
             padding: 8px 20px;
         }
 
-        
         .valuebet-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-.valuebet-button:hover {
-    background-color: #2980b9;
-}
+        .valuebet-button:hover {
+            background-color: #2980b9;
+        }
 
-.valuebet-button .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: var(--primary-color);
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-    font-weight: bold;
-}
+        .valuebet-button .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
+        /* Estilos para el saldo */
+        .balance-container {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        
+        .balance-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .balance-edit {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .balance-edit input {
+            width: 150px;
+            padding: 8px 12px;
+            text-align: right;
+            font-size: 16px;
+        }
+
+        .balance-edit button {
+            width: auto;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .positive-balance {
+            color: var(--success-color);
+        }
+
+        .negative-balance {
+            color: var(--danger-color);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Sección de Saldo -->
+        <div class="balance-container">
+            <div>
+                <h3>Saldo Actual</h3>
+                <div class="balance-display" id="current-balance">0.00 €</div>
+            </div>
+            <div class="balance-edit">
+                <input type="number" id="edit-balance" step="0.01" min="0" placeholder="Nuevo saldo">
+                <button id="update-balance" class="btn-primary">Actualizar</button>
+            </div>
+        </div>
+
         <div class="header-bar">
             <h1>Apuestas 2025</h1>
             <div class="valuebet-button" id="open-valuebet">
               <span class="icon">🔍</span>
               <span class="label">Calculadora Value Bets</span>
             </div>
-          </div>
-          
-          
-          
+        </div>
         
         <div class="modal-overlay" id="valuebet-modal">
             <div class="modal-content">
@@ -365,7 +413,6 @@
             </div>
         </div>
         
-
         <div class="grid">
             <div>
                 <h2>Registrar Apuesta</h2>
@@ -469,46 +516,46 @@
 
     <script>
         // Value Bets Calculator
-const openVBBtn = document.getElementById('open-valuebet');
-const valueBetModal = document.getElementById('valuebet-modal');
-const closeVBBtn = document.getElementById('close-valuebet');
-const calcVBBtn = document.getElementById('calculate-valuebet');
-const vbProbInput = document.getElementById('vb-prob');
-const vbOddsInput = document.getElementById('vb-odds');
-const vbResult = document.getElementById('vb-result');
+        const openVBBtn = document.getElementById('open-valuebet');
+        const valueBetModal = document.getElementById('valuebet-modal');
+        const closeVBBtn = document.getElementById('close-valuebet');
+        const calcVBBtn = document.getElementById('calculate-valuebet');
+        const vbProbInput = document.getElementById('vb-prob');
+        const vbOddsInput = document.getElementById('vb-odds');
+        const vbResult = document.getElementById('vb-result');
 
-openVBBtn.addEventListener('click', () => {
-    valueBetModal.style.display = 'flex';
-    vbResult.textContent = '';
-    vbProbInput.value = '';
-    vbOddsInput.value = '';
-});
+        openVBBtn.addEventListener('click', () => {
+            valueBetModal.style.display = 'flex';
+            vbResult.textContent = '';
+            vbProbInput.value = '';
+            vbOddsInput.value = '';
+        });
 
-closeVBBtn.addEventListener('click', () => {
-    valueBetModal.style.display = 'none';
-});
+        closeVBBtn.addEventListener('click', () => {
+            valueBetModal.style.display = 'none';
+        });
 
-calcVBBtn.addEventListener('click', () => {
-    const prob = parseFloat(vbProbInput.value);
-    const odds = parseFloat(vbOddsInput.value);
+        calcVBBtn.addEventListener('click', () => {
+            const prob = parseFloat(vbProbInput.value);
+            const odds = parseFloat(vbOddsInput.value);
 
-    if (isNaN(prob) || isNaN(odds) || prob <= 0 || prob > 100 || odds < 1.01) {
-        vbResult.textContent = 'Por favor, ingresa valores válidos.';
-        vbResult.style.color = '#e74c3c'; // rojo
-        return;
-    }
+            if (isNaN(prob) || isNaN(odds) || prob <= 0 || prob > 100 || odds < 1.01) {
+                vbResult.textContent = 'Por favor, ingresa valores válidos.';
+                vbResult.style.color = '#e74c3c'; // rojo
+                return;
+            }
 
-    const probDecimal = prob / 100;
-    const value = (probDecimal * odds) - 1;
+            const probDecimal = prob / 100;
+            const value = (probDecimal * odds) - 1;
 
-    if (value > 0) {
-        vbResult.textContent = `✅ ¡Es una Value Bet! Valor esperado: ${(value * 100).toFixed(2)}%`;
-        vbResult.style.color = '#2ecc71'; // verde
-    } else {
-        vbResult.textContent = `❌ No es una Value Bet. Valor esperado: ${(value * 100).toFixed(2)}%`;
-        vbResult.style.color = '#e74c3c'; // rojo
-    }
-});
+            if (value > 0) {
+                vbResult.textContent = `✅ ¡Es una Value Bet! Valor esperado: ${(value * 100).toFixed(2)}%`;
+                vbResult.style.color = '#2ecc71'; // verde
+            } else {
+                vbResult.textContent = `❌ No es una Value Bet. Valor esperado: ${(value * 100).toFixed(2)}%`;
+                vbResult.style.color = '#e74c3c'; // rojo
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             // Elementos del DOM
@@ -534,16 +581,23 @@ calcVBBtn.addEventListener('click', () => {
             const confirmActionBtn = document.getElementById('confirm-action');
             const cancelActionBtn = document.getElementById('cancel-action');
             
+            // Elementos del saldo
+            const currentBalanceElement = document.getElementById('current-balance');
+            const editBalanceInput = document.getElementById('edit-balance');
+            const updateBalanceBtn = document.getElementById('update-balance');
+            
             // Variables para manejar las acciones de confirmación
             let currentAction = null;
             let currentBetId = null;
             
-            // Cargar apuestas desde localStorage
+            // Cargar apuestas y saldo desde localStorage
             let bets = JSON.parse(localStorage.getItem('martingala_bets')) || [];
+            let currentBalance = parseFloat(localStorage.getItem('martingala_balance')) || 0;
             
-            // Renderizar apuestas y estadísticas
+            // Renderizar apuestas, estadísticas y saldo
             renderBets();
             updateStats();
+            updateBalanceDisplay();
             
             // Inicializar próxima apuesta a 0.00€
             nextBetValue.textContent = '0.00 €';
@@ -556,6 +610,7 @@ calcVBBtn.addEventListener('click', () => {
                 '¿Estás seguro de que quieres borrar todo el historial de apuestas? Esta acción no se puede deshacer.',
                 'reset'
             ));
+            updateBalanceBtn.addEventListener('click', updateBalance);
             
             confirmActionBtn.addEventListener('click', handleConfirmAction);
             cancelActionBtn.addEventListener('click', hideModal);
@@ -589,6 +644,23 @@ calcVBBtn.addEventListener('click', () => {
                 hideModal();
             }
             
+            // Función para actualizar el saldo
+            function updateBalance() {
+                const newBalance = parseFloat(editBalanceInput.value);
+                if (!isNaN(newBalance)) {
+                    currentBalance = newBalance;
+                    localStorage.setItem('martingala_balance', currentBalance.toString());
+                    updateBalanceDisplay();
+                    editBalanceInput.value = '';
+                }
+            }
+            
+            // Función para actualizar la visualización del saldo
+            function updateBalanceDisplay() {
+                currentBalanceElement.textContent = currentBalance.toFixed(2) + ' €';
+                currentBalanceElement.className = currentBalance >= 0 ? 'balance-display positive-balance' : 'balance-display negative-balance';
+            }
+            
             // Función para agregar una nueva apuesta
             function addBet() {
                 const description = descriptionInput.value.trim();
@@ -599,6 +671,17 @@ calcVBBtn.addEventListener('click', () => {
                 if (!description || !amount || amount <= 0 || !odds || odds < 1) {
                     alert('Por favor completa todos los campos con valores válidos');
                     return;
+                }
+                
+                // Actualizar saldo si la apuesta no está pendiente
+                if (result !== 'pending') {
+                    if (result === 'won') {
+                        currentBalance += (amount * odds) - amount;
+                    } else {
+                        currentBalance -= amount;
+                    }
+                    localStorage.setItem('martingala_balance', currentBalance.toString());
+                    updateBalanceDisplay();
                 }
                 
                 const newBet = {
@@ -624,45 +707,45 @@ calcVBBtn.addEventListener('click', () => {
             
             // Función para calcular la próxima apuesta según Martingala
             function calculateNextBet() {
-            const desiredProfit = parseFloat(desiredProfitInput.value) || 0;
-            const nextOdds = parseFloat(nextOddsInput.value) || 1.01;
-            
-            if (nextOdds <= 1) {
-                alert('La cuota debe ser mayor a 1');
-                return;
-            }
-            
-            // Calcular pérdidas acumuladas (ignorando apuestas pendientes)
-            let currentLoss = 0;
-            let lastWonIndex = -1;
-            
-            // Encontrar la última apuesta ganada (no pendiente)
-            for (let i = bets.length - 1; i >= 0; i--) {
-                if (bets[i].result === 'won') {
-                    lastWonIndex = i;
-                    break;
+                const desiredProfit = parseFloat(desiredProfitInput.value) || 0;
+                const nextOdds = parseFloat(nextOddsInput.value) || 1.01;
+                
+                if (nextOdds <= 1) {
+                    alert('La cuota debe ser mayor a 1');
+                    return;
+                }
+                
+                // Calcular pérdidas acumuladas (ignorando apuestas pendientes)
+                let currentLoss = 0;
+                let lastWonIndex = -1;
+                
+                // Encontrar la última apuesta ganada (no pendiente)
+                for (let i = bets.length - 1; i >= 0; i--) {
+                    if (bets[i].result === 'won') {
+                        lastWonIndex = i;
+                        break;
+                    }
+                }
+                
+                // Sumar todas las apuestas perdidas (no pendientes) después de la última ganada
+                for (let i = lastWonIndex + 1; i < bets.length; i++) {
+                    if (bets[i].result === 'lost') {
+                        currentLoss += bets[i].amount;
+                    }
+                }
+                
+                // Calcular próxima apuesta
+                const nextBet = (currentLoss + desiredProfit) / (nextOdds - 1);
+                
+                nextBetValue.textContent = nextBet.toFixed(2) + ' €';
+                currentLossElement.textContent = currentLoss.toFixed(2) + ' €';
+                
+                if (nextBet > 100) {
+                    warningMessage.textContent = '¡Advertencia! La cantidad a apostar es elevada.';
+                } else {
+                    warningMessage.textContent = '';
                 }
             }
-            
-            // Sumar todas las apuestas perdidas (no pendientes) después de la última ganada
-            for (let i = lastWonIndex + 1; i < bets.length; i++) {
-                if (bets[i].result === 'lost') {
-                    currentLoss += bets[i].amount;
-                }
-            }
-            
-            // Calcular próxima apuesta
-            const nextBet = (currentLoss + desiredProfit) / (nextOdds - 1);
-            
-            nextBetValue.textContent = nextBet.toFixed(2) + ' €';
-            currentLossElement.textContent = currentLoss.toFixed(2) + ' €';
-            
-            if (nextBet > 100) {
-                warningMessage.textContent = '¡Advertencia! La cantidad a apostar es elevado.';
-            } else {
-                warningMessage.textContent = '';
-            }
-        }
             
             // Función para renderizar la lista de apuestas
             function renderBets() {
@@ -774,6 +857,30 @@ calcVBBtn.addEventListener('click', () => {
                         return;
                     }
                     
+                    // Actualizar saldo si el resultado cambia
+                    if (bet.result !== newResult) {
+                        if (bet.result === 'won') {
+                            currentBalance -= (bet.amount * bet.odds) - bet.amount;
+                        } else if (bet.result === 'lost') {
+                            currentBalance += bet.amount;
+                        }
+                        
+                        if (newResult === 'won') {
+                            currentBalance += (newAmount * newOdds) - newAmount;
+                        } else if (newResult === 'lost') {
+                            currentBalance -= newAmount;
+                        }
+                        
+                        localStorage.setItem('martingala_balance', currentBalance.toString());
+                        updateBalanceDisplay();
+                    } else if (newResult === 'won' && (bet.amount !== newAmount || bet.odds !== newOdds)) {
+                        // Si sigue siendo ganada pero cambia cantidad o cuota
+                        currentBalance -= (bet.amount * bet.odds) - bet.amount;
+                        currentBalance += (newAmount * newOdds) - newAmount;
+                        localStorage.setItem('martingala_balance', currentBalance.toString());
+                        updateBalanceDisplay();
+                    }
+                    
                     bet.description = newDescription;
                     bet.amount = newAmount;
                     bet.odds = newOdds;
@@ -793,7 +900,23 @@ calcVBBtn.addEventListener('click', () => {
             
             // Función para eliminar una apuesta
             function deleteBet(betId) {
-                bets = bets.filter(b => b.id !== betId);
+                const betIndex = bets.findIndex(b => b.id === betId);
+                if (betIndex === -1) return;
+                
+                const bet = bets[betIndex];
+                
+                // Actualizar saldo si la apuesta no está pendiente
+                if (bet.result !== 'pending') {
+                    if (bet.result === 'won') {
+                        currentBalance -= (bet.amount * bet.odds) - bet.amount;
+                    } else {
+                        currentBalance += bet.amount;
+                    }
+                    localStorage.setItem('martingala_balance', currentBalance.toString());
+                    updateBalanceDisplay();
+                }
+                
+                bets.splice(betIndex, 1);
                 saveBets();
                 renderBets();
                 updateStats();
