@@ -1,777 +1,779 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="theme-color" content="#6c63ff">
-        <title>KikiFit</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KikiFit</title>
     <style>
-:root {
-    --primary: #6c63ff;
-    --secondary: #4a44b5;
-    --dark: #121212;
-    --dark-secondary: #1e1e1e;
-    --text: #e0e0e0;
-    --text-secondary: #a0a0a0;
-    --accent: #ff6b6b;
-    --success: #4caf50;
-    --warning: #ff9800;
-    --error: #f44336;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: var(--dark);
-    color: var(--text);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header y Navegación */
-header {
-    background-color: var(--dark-secondary);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-/* Menu Hamburguesa */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    width: 30px;
-    height: 25px;
-}
-
-.menu-toggle span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background-color: var(--text);
-    margin: 3px 0;
-    transition: 0.3s;
-    border-radius: 2px;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 10px;
-}
-
-nav ul li a {
-    color: var(--text);
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    display: block;
-    font-weight: 500;
-}
-
-nav ul li a:hover, 
-nav ul li a.active {
-    background-color: var(--primary);
-    color: white;
-}
-
-/* Secciones de contenido */
-.page {
-    display: none;
-    padding: 40px 0;
-    min-height: calc(100vh - 120px);
-}
-
-.page.active {
-    display: block;
-}
-
-.page-title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: var(--primary);
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.card {
-    background-color: var(--dark-secondary);
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Inicio */
-.current-weight {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.weight-input {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 12px 15px;
-    color: var(--text);
-    width: 120px;
-    font-size: 1rem;
-    transition: all 0.3s;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.weight-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
-}
-
-.btn {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: 600;
-    font-size: 0.95rem;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-.btn:hover {
-    background-color: var(--secondary);
-}
-
-.btn-secondary {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text);
-}
-
-.btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-danger {
-    background-color: var(--error);
-}
-
-.btn-danger:hover {
-    background-color: #d32f2f;
-}
-
-.current-date {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-}
-
-/* Guía de alimentación */
-.day-meals {
-    margin-bottom: 20px;
-}
-
-.meal-time {
-    color: var(--primary);
-    font-weight: 600;
-    margin: 15px 0 5px;
-}
-
-.meal-description {
-    margin-left: 15px;
-    color: var(--text-secondary);
-}
-
-/* Rutina de ejercicios */
-.exercise-day {
-    margin-bottom: 30px;
-}
-
-.day-title {
-    color: var(--primary);
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-}
-
-.exercise-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.exercise-table th {
-    background-color: rgba(108, 99, 255, 0.2);
-    color: var(--primary);
-    text-align: left;
-    padding: 12px 15px;
-}
-
-.exercise-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.exercise-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Calculadora de calorías */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-.form-control {
-    width: 100%;
-    max-width: 300px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 12px 15px;
-    color: var(--text);
-    font-size: 1rem;
-    transition: all 0.3s;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
-}
-
-.custom-select {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-}
-
-.custom-select select {
-    width: 100%;
-    background-color: var(--dark-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 12px 15px;
-    color: var(--text);
-    font-size: 1rem;
-    appearance: none;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.custom-select select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
-}
-
-.custom-select::after {
-    content: "▼";
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    color: var(--text);
-    pointer-events: none;
-    font-size: 0.8rem;
-}
-
-.result-box {
-    background-color: rgba(76, 175, 80, 0.1);
-    border: 1px solid var(--success);
-    border-radius: 6px;
-    padding: 20px;
-    margin-top: 20px;
-    display: none;
-}
-
-.result-box.active {
-    display: block;
-}
-
-.calories-result {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--success);
-    margin: 10px 0;
-}
-
-/* Historial de peso */
-.weight-history-form {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    align-items: flex-end;
-}
-
-.month-select {
-    background-color: var(--dark-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 12px 15px;
-    color: var(--text);
-    min-width: 150px;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.month-select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
-}
-
-.weight-history-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.weight-history-table th {
-    background-color: rgba(108, 99, 255, 0.2);
-    color: var(--primary);
-    text-align: left;
-    padding: 12px 15px;
-}
-
-.weight-history-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.weight-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.weight-actions .btn {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-}
-
-.no-data {
-    text-align: center;
-    color: var(--text-secondary);
-    padding: 30px;
-}
-
-.weight-summary {
-    background-color: rgba(108, 99, 255, 0.1);
-    border-radius: 6px;
-    padding: 15px;
-    margin-top: 20px;
-}
-
-.weight-change {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.positive {
-    color: var(--success);
-}
-
-.negative {
-    color: var(--error);
-}
-
-/* Tiendas de interés */
-.stores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.store-card {
-    background-color: var(--dark-secondary);
-    border-radius: 8px;
-    padding: 25px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-.store-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.store-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: var(--primary);
-}
-
-.store-name {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.store-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    display: block;
-    margin-top: 10px;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-.store-link:hover {
-    color: var(--primary);
-}
-
-/* Notificaciones */
-.notification-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.notification {
-    background-color: var(--dark-secondary);
-    border-left: 4px solid var(--primary);
-    border-radius: 6px;
-    padding: 15px 20px;
-    margin-top: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 300px;
-    transform: translateX(100%);
-    opacity: 0;
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-.notification.show {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.notification.success {
-    border-left-color: var(--success);
-}
-
-.notification.error {
-    border-left-color: var(--error);
-}
-
-.notification.warning {
-    border-left-color: var(--warning);
-}
-
-.notification-content {
-    flex: 1;
-}
-
-.notification-close {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 1.2rem;
-    margin-left: 10px;
-}
-
-.notification-close:hover {
-    color: var(--text);
-}
-
-/* Footer */
-footer {
-    background-color: var(--dark-secondary);
-    padding: 20px 0;
-    text-align: center;
-    color: var(--text-secondary);
-    margin-top: 40px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 15px 0;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background-color: var(--dark-secondary);
-        transition: left 0.3s ease;
-        z-index: 99;
-        padding: 20px;
-        overflow-y: auto;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    nav ul {
-        flex-direction: column;
-        margin-top: 0;
-        width: 100%;
-    }
-
-    nav ul li {
-        margin: 10px 0;
-        width: 100%;
-    }
-
-    nav ul li a {
-        padding: 15px 20px;
-        text-align: center;
-        border-radius: 8px;
-        font-size: 1.1rem;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    /* Mejoras para tablas en móviles */
-    .exercise-table,
-    .weight-history-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .exercise-table th,
-    .exercise-table td,
-    .weight-history-table th,
-    .weight-history-table td {
-        padding: 10px 8px;
-        font-size: 0.9rem;
-    }
-
-    /* Mejoras para formularios */
-    .form-control,
-    .custom-select,
-    .weight-input {
-        max-width: 100%;
-        font-size: 16px; /* Evita zoom en iOS */
-    }
-
-    .current-weight {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    .weight-input {
-        width: 100%;
-        max-width: none;
-    }
-
-    .weight-history-form {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .weight-actions {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .weight-actions .btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Mejoras para cards */
-    .card {
-        padding: 20px 15px;
-        margin-bottom: 20px;
-    }
-
-    .page-title {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
-
-    /* Tiendas en grid de una columna */
-    .stores-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    /* Notificaciones más pequeñas */
-    .notification {
-        min-width: 280px;
-        right: 10px;
-        left: 10px;
-        width: calc(100% - 20px);
-    }
-
-    .page {
-        padding: 20px 0;
-        min-height: calc(100vh - 100px);
-    }
-
-    .container {
-        padding: 0 15px;
-    }
-}
-
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 10px;
-    }
-
-    .page {
-        padding: 15px 0;
-    }
-
-    .card {
-        padding: 15px 10px;
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        padding: 12px 20px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .current-date {
-        font-size: 1rem;
-    }
-
-    .calories-result {
-        font-size: 1.3rem;
-    }
-
-    .page-title {
-        font-size: 1.3rem;
-    }
-
-    .logo {
-        font-size: 1.3rem;
-    }
-
-    .store-card {
-        padding: 20px 15px;
-    }
-
-    .store-icon {
-        font-size: 2rem;
-    }
-}
-
-/* Para tablets */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .stores-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .container {
-        padding: 0 30px;
-    }
-
-    .nav-container {
-        padding: 15px 0;
-    }
-}
-
-/* Prevenir zoom en inputs en iOS */
-@media (max-width: 768px) {
-    input, select, textarea {
-        font-size: 16px;
-    }
-}
-
-/* Mejoras de rendimiento táctil */
-.nav-link, .store-card, .btn, .notification-close, .store-link {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
+        /* AQUÍ VA TODO EL CSS QUE TE PASÉ EN LA RESPUESTA ANTERIOR */
+        /* (El CSS completo con todas las mejoras responsive) */
+        
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a44b5;
+            --dark: #121212;
+            --dark-secondary: #1e1e1e;
+            --text: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent: #ff6b6b;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header y Navegación */
+        header {
+            background-color: var(--dark-secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Menu Hamburguesa */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            width: 30px;
+            height: 25px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 10px;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: block;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Secciones de contenido */
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: calc(100vh - 120px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .card {
+            background-color: var(--dark-secondary);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Inicio */
+        .current-weight {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .weight-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: var(--text);
+            width: 120px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .weight-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            font-size: 0.95rem;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-danger {
+            background-color: var(--error);
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .current-date {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Guía de alimentación */
+        .day-meals {
+            margin-bottom: 20px;
+        }
+
+        .meal-time {
+            color: var(--primary);
+            font-weight: 600;
+            margin: 15px 0 5px;
+        }
+
+        .meal-description {
+            margin-left: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* Rutina de ejercicios */
+        .exercise-day {
+            margin-bottom: 30px;
+        }
+
+        .day-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .exercise-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .exercise-table th {
+            background-color: rgba(108, 99, 255, 0.2);
+            color: var(--primary);
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .exercise-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .exercise-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Calculadora de calorías */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            max-width: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+
+        .custom-select {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .custom-select select {
+            width: 100%;
+            background-color: var(--dark-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: var(--text);
+            font-size: 1rem;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .custom-select select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+
+        .custom-select::after {
+            content: "▼";
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: var(--text);
+            pointer-events: none;
+            font-size: 0.8rem;
+        }
+
+        .result-box {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.active {
+            display: block;
+        }
+
+        .calories-result {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+            margin: 10px 0;
+        }
+
+        /* Historial de peso */
+        .weight-history-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .month-select {
+            background-color: var(--dark-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: var(--text);
+            min-width: 150px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .month-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+
+        .weight-history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .weight-history-table th {
+            background-color: rgba(108, 99, 255, 0.2);
+            color: var(--primary);
+            text-align: left;
+            padding: 12px 15px;
+        }
+
+        .weight-history-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .weight-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .weight-actions .btn {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .no-data {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 30px;
+        }
+
+        .weight-summary {
+            background-color: rgba(108, 99, 255, 0.1);
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .weight-change {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--error);
+        }
+
+        /* Tiendas de interés */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .store-card {
+            background-color: var(--dark-secondary);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .store-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .store-name {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .store-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .store-link:hover {
+            color: var(--primary);
+        }
+
+        /* Notificaciones */
+        .notification-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .notification {
+            background-color: var(--dark-secondary);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            border-left-color: var(--success);
+        }
+
+        .notification.error {
+            border-left-color: var(--error);
+        }
+
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        .notification-close:hover {
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-secondary);
+            padding: 20px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 15px 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-secondary);
+                transition: left 0.3s ease;
+                z-index: 99;
+                padding: 20px;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 0;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                width: 100%;
+            }
+
+            nav ul li a {
+                padding: 15px 20px;
+                text-align: center;
+                border-radius: 8px;
+                font-size: 1.1rem;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            /* Mejoras para tablas en móviles */
+            .exercise-table,
+            .weight-history-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .exercise-table th,
+            .exercise-table td,
+            .weight-history-table th,
+            .weight-history-table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+
+            /* Mejoras para formularios */
+            .form-control,
+            .custom-select,
+            .weight-input {
+                max-width: 100%;
+                font-size: 16px; /* Evita zoom en iOS */
+            }
+
+            .current-weight {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .weight-input {
+                width: 100%;
+                max-width: none;
+            }
+
+            .weight-history-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .weight-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .weight-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Mejoras para cards */
+            .card {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            /* Tiendas en grid de una columna */
+            .stores-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            /* Notificaciones más pequeñas */
+            .notification {
+                min-width: 280px;
+                right: 10px;
+                left: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .page {
+                padding: 20px 0;
+                min-height: calc(100vh - 100px);
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .page {
+                padding: 15px 0;
+            }
+
+            .card {
+                padding: 15px 10px;
+                margin-bottom: 15px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .current-date {
+                font-size: 1rem;
+            }
+
+            .calories-result {
+                font-size: 1.3rem;
+            }
+
+            .page-title {
+                font-size: 1.3rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .store-card {
+                padding: 20px 15px;
+            }
+
+            .store-icon {
+                font-size: 2rem;
+            }
+        }
+
+        /* Para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .stores-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .container {
+                padding: 0 30px;
+            }
+
+            .nav-container {
+                padding: 15px 0;
+            }
+        }
+
+        /* Prevenir zoom en inputs en iOS */
+        @media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+
+        /* Mejoras de rendimiento táctil */
+        .nav-link, .store-card, .btn, .notification-close, .store-link {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
     </style>
 </head>
 <body>
-<!-- Header y Navegación -->
-<header>
-    <div class="container">
-        <div class="nav-container">
-            <div class="logo">KikiFit</div>
-            
-            <!-- Botón menú hamburguesa -->
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <nav class="nav-menu" id="navMenu">
-                <ul>
-                    <li><a href="#" class="nav-link active" data-page="inicio">Inicio</a></li>
-                    <li><a href="#" class="nav-link" data-page="alimentacion">Guía de Alimentación</a></li>
-                    <li><a href="#" class="nav-link" data-page="ejercicios">Rutina de Ejercicios</a></li>
-                    <li><a href="#" class="nav-link" data-page="calorias">Calculadora de Calorías</a></li>
-                    <li><a href="#" class="nav-link" data-page="historial">Historial de Peso</a></li>
-                    <li><a href="#" class="nav-link" data-page="tiendas">Tiendas de Interés</a></li>
-                </ul>
-            </nav>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">KikiFit</div>
+                
+                <!-- BOTÓN MENÚ HAMBURGUESA (LAS 3 BARRAS) -->
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- MENÚ DE NAVEGACIÓN -->
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="inicio">Inicio</a></li>
+                        <li><a href="#" class="nav-link" data-page="alimentacion">Guía de Alimentación</a></li>
+                        <li><a href="#" class="nav-link" data-page="ejercicios">Rutina de Ejercicios</a></li>
+                        <li><a href="#" class="nav-link" data-page="calorias">Calculadora de Calorías</a></li>
+                        <li><a href="#" class="nav-link" data-page="historial">Historial de Peso</a></li>
+                        <li><a href="#" class="nav-link" data-page="tiendas">Tiendas de Interés</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <main class="container">
         <!-- Página de Inicio -->
@@ -1100,33 +1102,35 @@ footer {
     <div class="notification-container" id="notification-container">
         <!-- Las notificaciones se insertarán aquí dinámicamente -->
     </div>
+
     <script>
         // Menú hamburguesa para móviles
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
 
-if (menuToggle) {
-    menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    });
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
 
-    // Cerrar menú al hacer clic en un enlace
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
+            // Cerrar menú al hacer clic en un enlace
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
 
-    // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
         }
-    });
-}
+
         // Función para mostrar notificaciones
         function showNotification(message, type = 'success') {
             const container = document.getElementById('notification-container');
