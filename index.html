@@ -63,26 +63,44 @@
         }
 
         /* Menu Hamburguesa */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            width: 30px;
-            height: 25px;
-        }
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: 30px;
+    height: 25px;
+}
 
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--text);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #ffffff; /* BLANCO para mejor visibilidad */
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Efecto hover para el botón del menú */
+.menu-toggle:hover span {
+    background-color: var(--primary);
+}
+
+/* Animación cuando el menú está activo */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
 
         nav ul {
             display: flex;
@@ -788,7 +806,7 @@
                 <p class="current-date" id="current-date"></p>
             </div>
             <div class="card">
-                <h2>1Resumen del Día</h2>
+                <h2>Resumen del Día</h2>
                 <p>Aquí puedes ver tu progreso diario y acceder rápidamente a las secciones más importantes de tu plan de fitness.</p>
             </div>
         </section>
@@ -1104,32 +1122,35 @@
     </div>
 
     <script>
-        // Menú hamburguesa para móviles
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+// Menú hamburguesa para móviles
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-            });
+if (menuToggle) {
+    menuToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active'); // Añade esta línea
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
 
-            // Cerrar menú al hacer clic en un enlace
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active'); // Añade esta línea
+            document.body.style.overflow = '';
+        });
+    });
 
-            // Cerrar menú al hacer clic fuera
-            document.addEventListener('click', function(e) {
-                if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                    navMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active'); // Añade esta línea
+            document.body.style.overflow = '';
         }
+    });
+}
 
         // Función para mostrar notificaciones
         function showNotification(message, type = 'success') {
