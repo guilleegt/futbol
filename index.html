@@ -62,36 +62,40 @@
             color: var(--primary);
         }
 
-        /* Menu Hamburguesa */
+/* Menu Hamburguesa */
 .menu-toggle {
     display: none;
     flex-direction: column;
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--primary);
+    border-radius: 4px;
     cursor: pointer;
-    padding: 5px;
-    width: 30px;
-    height: 25px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--text);
 }
 
 .menu-toggle span {
     display: block;
     height: 3px;
-    width: 100%;
-    background-color: #ffffff; /* BLANCO para mejor visibilidad */
-    margin: 3px 0;
+    width: 24px;
+    background-color: #ffffff;
+    margin: 2px 0;
     transition: 0.3s;
     border-radius: 2px;
 }
 
-/* Efecto hover para el botón del menú */
-.menu-toggle:hover span {
-    background-color: var(--primary);
-}
-
 /* Animación cuando el menú está activo */
 .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -99,9 +103,8 @@
 }
 
 .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+    transform: rotate(-45deg) translate(6px, -6px);
 }
-
         nav ul {
             display: flex;
             list-style: none;
@@ -555,54 +558,64 @@
             margin-top: 40px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 15px 0;
-            }
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 0;
+    }
 
-            .menu-toggle {
-                display: flex;
-            }
+    .menu-toggle {
+        display: flex; /* Asegurar que se muestre en móviles */
+    }
 
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background-color: var(--dark-secondary);
-                transition: left 0.3s ease;
-                z-index: 99;
-                padding: 20px;
-                overflow-y: auto;
-            }
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--dark-secondary);
+        transition: left 0.3s ease;
+        z-index: 99;
+        padding: 20px;
+        overflow-y: auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
 
-            .nav-menu.active {
-                left: 0;
-            }
+    .nav-menu.active {
+        left: 0;
+    }
 
-            nav ul {
-                flex-direction: column;
-                margin-top: 0;
-                width: 100%;
-            }
+    nav ul {
+        flex-direction: column;
+        margin-top: 0;
+        width: 100%;
+    }
 
-            nav ul li {
-                margin: 10px 0;
-                width: 100%;
-            }
+    nav ul li {
+        margin: 8px 0;
+        width: 100%;
+    }
 
-            nav ul li a {
-                padding: 15px 20px;
-                text-align: center;
-                border-radius: 8px;
-                font-size: 1.1rem;
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
-            }
+    nav ul li a {
+        padding: 15px 20px;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
 
             /* Mejoras para tablas en móviles */
             .exercise-table,
