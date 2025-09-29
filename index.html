@@ -558,6 +558,90 @@
             margin-top: 40px;
         }
 
+        /* Menú de selección de usuario al estilo Netflix */
+        .user-selection-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .user-selection-container {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .user-selection-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .user-selection-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: #e5e5e5;
+        }
+
+        .user-profiles {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .user-profile {
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 150px;
+        }
+
+        .user-profile:hover {
+            transform: scale(1.05);
+        }
+
+        .user-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Cambiado a circular */
+            margin-bottom: 1rem;
+            border: 3px solid transparent;
+            transition: border-color 0.3s;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .user-profile:hover .user-avatar {
+            border-color: white;
+        }
+
+        .user-name {
+            font-size: 1.2rem;
+            color: #808080;
+            transition: color 0.3s;
+        }
+
+        .user-profile:hover .user-name {
+            color: white;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-container {
@@ -701,6 +785,24 @@
             .container {
                 padding: 0 15px;
             }
+
+            /* Responsive para menú de usuario */
+            .user-selection-title {
+                font-size: 2rem;
+            }
+
+            .user-selection-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .user-avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .user-profile {
+                width: 120px;
+            }
         }
 
         /* Para pantallas muy pequeñas */
@@ -747,6 +849,28 @@
             .store-icon {
                 font-size: 2rem;
             }
+
+            /* Responsive para menú de usuario en móviles pequeños */
+            .user-selection-title {
+                font-size: 1.8rem;
+            }
+
+            .user-selection-subtitle {
+                font-size: 1rem;
+            }
+
+            .user-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .user-profile {
+                width: 100px;
+            }
+
+            .user-name {
+                font-size: 1rem;
+            }
         }
 
         /* Para tablets */
@@ -779,6 +903,27 @@
     </style>
 </head>
 <body>
+    <!-- Menú de selección de usuario al estilo Netflix -->
+    <div class="user-selection-overlay" id="userSelectionOverlay">
+        <div class="user-selection-container">
+            <h1 class="user-selection-title">Elige tu usuario</h1>
+            <div class="user-profiles">
+                <div class="user-profile" data-user="enrique">
+                    <div class="user-avatar">
+                        <img src="https://www.creativefabrica.com/wp-content/uploads/2021/03/02/Modern-ET-Letter-Logo-Design-Graphic-Graphics-9102527-1.jpg" alt="Enrique">
+                    </div>
+                    <div class="user-name">Enrique</div>
+                </div>
+                <div class="user-profile" data-user="laura">
+                    <div class="user-avatar">
+                        <img src="https://img.freepik.com/vector-premium/vector-logotipo-letra-l-moderna_724449-55.jpg" alt="Laura">
+                    </div>
+                    <div class="user-name">Laura</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="nav-container">
@@ -1135,6 +1280,32 @@
     </div>
 
     <script>
+// Menú de selección de usuario
+const userSelectionOverlay = document.getElementById('userSelectionOverlay');
+const userProfiles = document.querySelectorAll('.user-profile');
+
+// Mostrar el menú de usuario al cargar la página
+userSelectionOverlay.style.display = 'flex';
+
+// Configurar evento de clic en los perfiles de usuario
+userProfiles.forEach(profile => {
+    profile.addEventListener('click', function() {
+        const selectedUser = this.getAttribute('data-user');
+        
+        // Guardar el usuario seleccionado en localStorage
+        localStorage.setItem('selectedUser', selectedUser);
+        
+        // Ocultar el menú de selección
+        userSelectionOverlay.style.display = 'none';
+        
+        // Mostrar notificación de bienvenida
+        showNotification(`¡Bienvenido/a, ${selectedUser.charAt(0).toUpperCase() + selectedUser.slice(1)}!`, 'success');
+        
+        // Aquí puedes agregar lógica adicional basada en el usuario seleccionado
+        console.log(`Usuario seleccionado: ${selectedUser}`);
+    });
+});
+
 // Menú hamburguesa para móviles
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
